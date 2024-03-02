@@ -8,7 +8,7 @@ datasource db {
 }
 
 model clientes {
-  id_cliente   Int       @id
+  id_cliente   Int       @id @default(autoincrement())
   nombre       String?   @db.VarChar(255)
   apellido     String?   @db.VarChar(255)
   direccion    String?   @db.VarChar(255)
@@ -21,7 +21,7 @@ model clientes {
 }
 
 model empleados {
-  id_empleado  Int       @id
+  id_empleado  Int       @id @default(autoincrement())
   nombre       String?   @db.VarChar(255)
   apellido     String?   @db.VarChar(255)
   direccion    String?   @db.VarChar(255)
@@ -36,7 +36,7 @@ model empleados {
 }
 
 model paquetesturisticos {
-  codigo_paquete      Int                   @id
+  codigo_paquete      Int                   @id @default(autoincrement())
   costo_paquete       Decimal?              @db.Decimal(10, 2)
   nombre_paquete      String?               @db.VarChar(30)
   url_image           String?               @db.VarChar(500)
@@ -45,7 +45,7 @@ model paquetesturisticos {
 }
 
 model serviciosenpaquetes {
-  id                  Int                  @id
+  id                  Int                  @id @default(autoincrement())
   codigo_paquete      Int?
   codigo_servicio     Int?
   paquetesturisticos  paquetesturisticos?  @relation(fields: [codigo_paquete], references: [codigo_paquete], onDelete: NoAction, onUpdate: NoAction)
@@ -53,7 +53,7 @@ model serviciosenpaquetes {
 }
 
 model serviciosturisticos {
-  codigo_servicio     Int                   @id
+  codigo_servicio     Int                   @id @default(autoincrement())
   nombre              String?               @db.VarChar(255)
   descripcion_breve   String?               @db.VarChar(255)
   destino_servicio    String?               @db.VarChar(255)
@@ -66,7 +66,7 @@ model serviciosturisticos {
 }
 
 model ventas {
-  num_venta           Int                  @id
+  num_venta           Int                  @id @default(autoincrement())
   fecha_venta         DateTime?            @db.Date
   medio_pago          String?              @db.VarChar(50)
   id_cliente          Int?
