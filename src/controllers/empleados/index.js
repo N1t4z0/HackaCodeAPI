@@ -1,7 +1,7 @@
 const registerEmployee = require('./registerEmployee');
 const getAllEmployees = require('./getAllEmployees');
 const loginEmployee = require('./loginEmployee');
-const deleteEmployee = require('./deleteEmployes');
+const deleteEmployee = require('./deleteEmployee');
  const updateEmployee = require('./updateEmployee');
 
 
