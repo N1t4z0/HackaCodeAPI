@@ -1,6 +1,6 @@
 const registerEmployee = require('./registerEmployee');
 const getAllEmployees = require('./getAllEmployees');
-// const loginEmployee = require('./loginEmployee');
+ const loginEmployee = require('./loginEmployee');
 // const deleteEmployee = require('./deleteEmployes');
 // const updateEmployee = require('./updateEmployee');
 
@@ -8,7 +8,7 @@ const getAllEmployees = require('./getAllEmployees');
 module.exports = {
   registerEmployee,
    getAllEmployees,
-//   loginEmployee,
+   loginEmployee,
 //   deleteEmployee,
 //   updateEmployee,
 };
