@@ -17,6 +17,7 @@ model clientes {
   nacionalidad String?   @db.VarChar(50)
   celular      String?   @db.VarChar(20)
   email        String?   @db.VarChar(255)
+  password     String?   @db.VarChar(255)
   ventas       ventas[]
 }
 
@@ -32,6 +33,7 @@ model empleados {
   email        String?   @db.VarChar(255)
   cargo        String?   @db.VarChar(100)
   sueldo       Decimal?  @db.Decimal(10, 2)
+  password     String?   @db.VarChar(255)
   ventas       ventas[]
 }
 

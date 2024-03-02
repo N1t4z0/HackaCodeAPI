@@ -1,7 +1,7 @@
 const { parse,parseISO,format  } = require('date-fns');
 const prisma = require("../../db");
 const registerClient = async (req, res) => {
-    const { nombre, apellido, direccion, dni, fecha_nac, nacionalidad, celular, email } = req.body;
+    const { nombre, apellido, direccion, dni, fecha_nac, nacionalidad, celular, email, password } = req.body;
     try {
         console.log("ke onda tirrin entraste al registro")
       if (!nombre || typeof nombre !== 'string') {
@@ -15,6 +15,9 @@ const registerClient = async (req, res) => {
       }
       if (!dni || typeof dni !== 'string') {
         return res.status(400).json({ message: 'DNI inválido' });
+      }
+      if (!password || typeof password !== 'string') {
+        return res.status(400).json({ message: 'password inválido o vacio' });
       }
       // if (!fecha_nac || !(fecha_nac instanceof Date)) {
       //   return res.status(400).json({ message: 'Fecha de nacimiento inválida' });
@@ -44,7 +47,7 @@ console.log("Fecha de nacimiento:", fechaNacISO);
       } else 
       {  const cliente = await prisma.clientes.create({
         data: { nombre, apellido, direccion, dni, 
-        fecha_nac:fechaNacISO, nacionalidad, celular, email },
+        fecha_nac:fechaNacISO, nacionalidad, celular, email,password },
       });
       res.json(cliente);}
   

@@ -4,7 +4,7 @@ const clientsControllers = require('../controllers/clients');
 
 
  router.get("/", clientsControllers.getAllClients);
-// router.get("/login/:id", getClient);
+ router.get("/login", clientsControllers.loginClient);
 router.post("/register", clientsControllers.registerClient);
 // router.put("/update/:id", updateClient);
 // router.delete("/delete/:id", deleteClient);
