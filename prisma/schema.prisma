@@ -1,0 +1,80 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model clientes {
+  id_cliente   Int       @id
+  nombre       String?   @db.VarChar(255)
+  apellido     String?   @db.VarChar(255)
+  direccion    String?   @db.VarChar(255)
+  dni          String?   @db.VarChar(20)
+  fecha_nac    DateTime? @db.Date
+  nacionalidad String?   @db.VarChar(50)
+  celular      String?   @db.VarChar(20)
+  email        String?   @db.VarChar(255)
+  ventas       ventas[]
+}
+
+model empleados {
+  id_empleado  Int       @id
+  nombre       String?   @db.VarChar(255)
+  apellido     String?   @db.VarChar(255)
+  direccion    String?   @db.VarChar(255)
+  dni          String?   @db.VarChar(20)
+  fecha_nac    DateTime? @db.Date
+  nacionalidad String?   @db.VarChar(50)
+  celular      String?   @db.VarChar(20)
+  email        String?   @db.VarChar(255)
+  cargo        String?   @db.VarChar(100)
+  sueldo       Decimal?  @db.Decimal(10, 2)
+  ventas       ventas[]
+}
+
+model paquetesturisticos {
+  codigo_paquete      Int                   @id
+  costo_paquete       Decimal?              @db.Decimal(10, 2)
+  nombre_paquete      String?               @db.VarChar(30)
+  url_image           String?               @db.VarChar(500)
+  serviciosenpaquetes serviciosenpaquetes[]
+  ventas              ventas[]
+}
+
+model serviciosenpaquetes {
+  id                  Int                  @id
+  codigo_paquete      Int?
+  codigo_servicio     Int?
+  paquetesturisticos  paquetesturisticos?  @relation(fields: [codigo_paquete], references: [codigo_paquete], onDelete: NoAction, onUpdate: NoAction)
+  serviciosturisticos serviciosturisticos? @relation(fields: [codigo_servicio], references: [codigo_servicio], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model serviciosturisticos {
+  codigo_servicio     Int                   @id
+  nombre              String?               @db.VarChar(255)
+  descripcion_breve   String?               @db.VarChar(255)
+  destino_servicio    String?               @db.VarChar(255)
+  fecha_inicio        DateTime?             @db.Date
+  fecha_fin           DateTime?             @db.Date
+  costo_servicio      Decimal?              @db.Decimal(10, 2)
+  url_image           String?               @db.VarChar(500)
+  serviciosenpaquetes serviciosenpaquetes[]
+  ventas              ventas[]
+}
+
+model ventas {
+  num_venta           Int                  @id
+  fecha_venta         DateTime?            @db.Date
+  medio_pago          String?              @db.VarChar(50)
+  id_cliente          Int?
+  id_empleado         Int?
+  codigo_servicio     Int?
+  codigo_paquete      Int?
+  paquetesturisticos  paquetesturisticos?  @relation(fields: [codigo_paquete], references: [codigo_paquete], onDelete: NoAction, onUpdate: NoAction)
+  serviciosturisticos serviciosturisticos? @relation(fields: [codigo_servicio], references: [codigo_servicio], onDelete: NoAction, onUpdate: NoAction)
+  clientes            clientes?            @relation(fields: [id_cliente], references: [id_cliente], onDelete: NoAction, onUpdate: NoAction)
+  empleados           empleados?           @relation(fields: [id_empleado], references: [id_empleado], onDelete: NoAction, onUpdate: NoAction)
+}
