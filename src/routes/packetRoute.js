@@ -3,7 +3,7 @@ const router = Router();
 const ServicesControllers = require('../controllers/paquetes');
 
 
-// router.get("/", ServicesControllers.getAllPackages);
+ router.get("/", ServicesControllers.getAllPackages);
 // router.get("/:id", ServicesControllers.getPackageById);
 router.post("/create", ServicesControllers.createPackage);
 //   router.put("/update/:id", ServicesControllers.updatePackage);
